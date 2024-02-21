@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "nbering.html",
+    "href": "nbering.html",
+    "title": "Sea ice extent in Northern Bering",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the latest available data of Northern Bering. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.10\n0.30\n0.226666667\n0.25\n0.24\n\n\nFeb\n0.11\n0.30\n0.254166667\n0.28\n0.27\n\n\nMar\n0.06\n0.30\n0.263333333\n0.27\n0.27\n\n\nApr\n0.03\n0.30\n0.233333333\n0.20\n0.25\n\n\nMay\n0.00\n0.23\n0.090833333\n0.02\n0.12\n\n\nJun\n0.00\n0.03\n0.003611111\n0.00\n0.00\n\n\nJul\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nAug\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nSep\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nOct\n0.00\n0.00\n0.000000000\n0.00\nNA\n\n\nNov\n0.00\n0.09\n0.026388889\n0.01\nNA\n\n\nDec\n0.00\n0.25\n0.128333333\n0.07\nNA"
+  },
+  {
+    "objectID": "nbering.html#sea-ice-extent-summary",
+    "href": "nbering.html#sea-ice-extent-summary",
+    "title": "Sea ice extent in Northern Bering",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the latest available data of Northern Bering. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.10\n0.30\n0.226666667\n0.25\n0.24\n\n\nFeb\n0.11\n0.30\n0.254166667\n0.28\n0.27\n\n\nMar\n0.06\n0.30\n0.263333333\n0.27\n0.27\n\n\nApr\n0.03\n0.30\n0.233333333\n0.20\n0.25\n\n\nMay\n0.00\n0.23\n0.090833333\n0.02\n0.12\n\n\nJun\n0.00\n0.03\n0.003611111\n0.00\n0.00\n\n\nJul\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nAug\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nSep\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nOct\n0.00\n0.00\n0.000000000\n0.00\nNA\n\n\nNov\n0.00\n0.09\n0.026388889\n0.01\nNA\n\n\nDec\n0.00\n0.25\n0.128333333\n0.07\nNA"
+  },
+  {
+    "objectID": "nbering.html#sea-ice-concentration-data",
+    "href": "nbering.html#sea-ice-concentration-data",
+    "title": "Sea ice extent in Northern Bering",
+    "section": "Sea ice concentration data",
+    "text": "Sea ice concentration data\nThe sea ice extent is calculated using remote sensing data on sea ice concentration from NOAA/NSIDC, made available by PolarWatch. There are two versions of this data: near-real-time and science quality. For the purposes of this data summary, the science quality data were utilized, which are subject to approximately a three-month delay due to quality control processes.\nSea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly"
+  },
+  {
+    "objectID": "nbering.html#data-resources",
+    "href": "nbering.html#data-resources",
+    "title": "Sea ice extent in Northern Bering",
+    "section": "Data resources",
+    "text": "Data resources\nThe complete time series data from 1978 to present and sample codes in R and Python can be accessed at PolarWatch\n\nData preview and download\nPolarWatch data catalog\n\nFor data assistance, please contact polar.watch@noaa.gov"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Sea Ice in Alaska",
+    "section": "",
+    "text": "What is Sea Ice?\nSea ice is seawater that has frozen and floats in the ocean, forming exclusively within the ocean itself. Unlike sea ice, icebergs, glaciers, and ice shelves originate on land before breaking off and floating in the ocean. In the Arctic, sea ice accumulates in the fall and winter and diminishes in the spring and summer, though it does not vanish entirely.\n\n\nWhy is Sea Ice Important?\nSea ice plays profound roles in polar ecosystems, environment, climate and weather.Sea ice is crucial in polar ecosystems, environmental balance and climate, and weather patterns.\nDuring summer, melting sea ice releases essential nutrients into the ocean, sparking the growth of phytoplankton as more sunlight penetrates the water. In winter, the as the sea ice forms, it expels salt, altering the salinity of the water beneath. This saltier water descends, stirring the ocean layers and bringing nutrients to the surface.\nThe presence of sea ice also modulates coastal condition, dampening the wind and wave impacts. Its reflective surface sends sunlight back into space, playing a key role in climate regulation by reducing heat absorption.\nFurthermore, sea ice forms a vital habitat for various Arctic mammals.\n\nSea Ice on NOAA/NESDIS\nSeaIce on NASA Earth Observatory\nQuick Facts about Sea Ice from NSIDC\n\n\n\nSea Ice Data: Concentration and Extent\nSea ice concentration is a measurement of the amount of sea ice in a given area and Sea Ice Extent is the total area covered by some amount of ice, including open water between ice floes.\nice extent is typically reported in square kilometers. Extent defines a region as either “ice-covered” or “not ice-covered.” A threshold determines this labeling.\nA typical threshold is 15 percent, meaning that if the data cell has greater than 15 percent ice concentration, the cell is labeled as “ice-covered.” Sea Ice Index products have a threshold of 15 percent. A threshold can also be as high as 30 percent.\n\nMore about Sea Ice Extent from NSIDC\nGet Sea Ice Satellite data (NOAA PolarWatch)\nTutorial and code for the data"
+  },
+  {
+    "objectID": "seaice.html",
+    "href": "seaice.html",
+    "title": "Sea Ice in Alaska",
+    "section": "",
+    "text": "Sea ice is seawater that has frozen and floats in the ocean, forming exclusively within the ocean itself. Unlike sea ice, icebergs, glaciers, and ice shelves originate on land before breaking off and floating in the ocean. In the Arctic, sea ice accumulates in the fall and winter and diminishes in the spring and summer, though it does not vanish entirely.\n\n\n\nSea ice plays profound roles in polar ecosystems, environment, climate and weather.Sea ice is crucial in polar ecosystems, environmental balance and climate, and weather patterns.\nDuring summer, melting sea ice releases essential nutrients into the ocean, sparking the growth of phytoplankton as more sunlight penetrates the water. In winter, the as the sea ice forms, it expels salt, altering the salinity of the water beneath. This saltier water descends, stirring the ocean layers and bringing nutrients to the surface.\nThe presence of sea ice also modulates coastal condition, dampening the wind and wave impacts. Its reflective surface sends sunlight back into space, playing a key role in climate regulation by reducing heat absorption.\nFurthermore, sea ice forms a vital habitat for various Arctic mammals.\n\nSea Ice on NOAA/NESDIS\nSeaIce on NASA Earth Observatory\nQuick Facts about Sea Ice from NSIDC\n\n\n\n\nSea ice concentration is a measurement of the amount of sea ice in a given area and Sea Ice Extent is the total area covered by some amount of ice, including open water between ice floes.\nice extent is typically reported in square kilometers. Extent defines a region as either “ice-covered” or “not ice-covered.” A threshold determines this labeling.\nA typical threshold is 15 percent, meaning that if the data cell has greater than 15 percent ice concentration, the cell is labeled as “ice-covered.” Sea Ice Index products have a threshold of 15 percent. A threshold can also be as high as 30 percent.\n\nMore about Sea Ice Extent from NSIDC\nGet Sea Ice Satellite data (NOAA PolarWatch)\nTutorial and code for the data"
+  },
+  {
+    "objectID": "seaice.html#sea-ice-in-the-arctic",
+    "href": "seaice.html#sea-ice-in-the-arctic",
+    "title": "Sea Ice in Alaska",
+    "section": "",
+    "text": "Sea ice is seawater that has frozen and floats in the ocean, forming exclusively within the ocean itself. Unlike sea ice, icebergs, glaciers, and ice shelves originate on land before breaking off and floating in the ocean. In the Arctic, sea ice accumulates in the fall and winter and diminishes in the spring and summer, though it does not vanish entirely.\n\n\n\nSea ice plays profound roles in polar ecosystems, environment, climate and weather.Sea ice is crucial in polar ecosystems, environmental balance and climate, and weather patterns.\nDuring summer, melting sea ice releases essential nutrients into the ocean, sparking the growth of phytoplankton as more sunlight penetrates the water. In winter, the as the sea ice forms, it expels salt, altering the salinity of the water beneath. This saltier water descends, stirring the ocean layers and bringing nutrients to the surface.\nThe presence of sea ice also modulates coastal condition, dampening the wind and wave impacts. Its reflective surface sends sunlight back into space, playing a key role in climate regulation by reducing heat absorption.\nFurthermore, sea ice forms a vital habitat for various Arctic mammals.\n\nSea Ice on NOAA/NESDIS\nSeaIce on NASA Earth Observatory\nQuick Facts about Sea Ice from NSIDC\n\n\n\n\nSea ice concentration is a measurement of the amount of sea ice in a given area and Sea Ice Extent is the total area covered by some amount of ice, including open water between ice floes.\nice extent is typically reported in square kilometers. Extent defines a region as either “ice-covered” or “not ice-covered.” A threshold determines this labeling.\nA typical threshold is 15 percent, meaning that if the data cell has greater than 15 percent ice concentration, the cell is labeled as “ice-covered.” Sea Ice Index products have a threshold of 15 percent. A threshold can also be as high as 30 percent.\n\nMore about Sea Ice Extent from NSIDC\nGet Sea Ice Satellite data (NOAA PolarWatch)\nTutorial and code for the data"
+  },
+  {
+    "objectID": "chartjs/inst/htmlwidgets/lib/Chart.js-4.4.1/LICENSE.html",
+    "href": "chartjs/inst/htmlwidgets/lib/Chart.js-4.4.1/LICENSE.html",
+    "title": "Sea Ice in Alaska",
+    "section": "",
+    "text": "The MIT License (MIT)\nCopyright (c) 2014-2022 Chart.js Contributors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "chartjs/NEWS.html",
+    "href": "chartjs/NEWS.html",
+    "title": "chartjs 0.3.3",
+    "section": "",
+    "text": "chartjs 0.3.3\n\nhandle resize problems (#10),\nactually edit scales,\nworks fine with flexdasboards with correct options\n\n\n\nchartjs 0.3.0\n\nRewrote the package using S3 methods for easier dispatch."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "arctic.html",
+    "href": "arctic.html",
+    "title": "Sea ice extent in Alaskan Arctic",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the lastest available data of the Alaskan Arctic. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.49\n0.50\n0.49\n0.50\n0.49\n\n\nFeb\n0.49\n0.50\n0.50\n0.50\n0.49\n\n\nMar\n0.48\n0.50\n0.50\n0.50\n0.49\n\n\nApr\n0.47\n0.50\n0.49\n0.49\n0.49\n\n\nMay\n0.34\n0.50\n0.46\n0.47\n0.48\n\n\nJun\n0.18\n0.48\n0.38\n0.34\n0.39\n\n\nJul\n0.02\n0.39\n0.24\n0.20\n0.17\n\n\nAug\n0.00\n0.33\n0.10\n0.05\n0.00\n\n\nSep\n0.00\n0.27\n0.07\n0.01\n0.00\n\n\nOct\n0.00\n0.38\n0.17\n0.07\nNA\n\n\nNov\n0.19\n0.48\n0.36\n0.24\nNA\n\n\nDec\n0.00\n0.50\n0.46\n0.42\nNA"
+  },
+  {
+    "objectID": "arctic.html#sea-ice-extent-summary",
+    "href": "arctic.html#sea-ice-extent-summary",
+    "title": "Sea ice extent in Alaskan Arctic",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the lastest available data of the Alaskan Arctic. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.49\n0.50\n0.49\n0.50\n0.49\n\n\nFeb\n0.49\n0.50\n0.50\n0.50\n0.49\n\n\nMar\n0.48\n0.50\n0.50\n0.50\n0.49\n\n\nApr\n0.47\n0.50\n0.49\n0.49\n0.49\n\n\nMay\n0.34\n0.50\n0.46\n0.47\n0.48\n\n\nJun\n0.18\n0.48\n0.38\n0.34\n0.39\n\n\nJul\n0.02\n0.39\n0.24\n0.20\n0.17\n\n\nAug\n0.00\n0.33\n0.10\n0.05\n0.00\n\n\nSep\n0.00\n0.27\n0.07\n0.01\n0.00\n\n\nOct\n0.00\n0.38\n0.17\n0.07\nNA\n\n\nNov\n0.19\n0.48\n0.36\n0.24\nNA\n\n\nDec\n0.00\n0.50\n0.46\n0.42\nNA"
+  },
+  {
+    "objectID": "arctic.html#sea-ice-concentration-data",
+    "href": "arctic.html#sea-ice-concentration-data",
+    "title": "Sea ice extent in Alaskan Arctic",
+    "section": "Sea ice concentration data",
+    "text": "Sea ice concentration data\nThe sea ice extent is calculated using remote sensing data on sea ice concentration from NOAA/NSIDC, made available by PolarWatch. There are two versions of this data: near-real-time and science quality. For the purposes of this data summary, the science quality data were utilized, which are subject to approximately a three-month delay due to quality control processes.\nData : Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly"
+  },
+  {
+    "objectID": "arctic.html#resources",
+    "href": "arctic.html#resources",
+    "title": "Sea ice extent in Alaskan Arctic",
+    "section": "Resources",
+    "text": "Resources\nThe complete time series data from 1978 to present and sample codes in R and Python can be accessed at PolarWatch\n\nData preview and download sea ice concentration\nPolarWatch data catalog\nCouncil Report?\n\n\n\n\n\n\n\nAssistance\n\n\n\nFor data assistance, please contact polar.watch@noaa.gov\n\n\n\n\n\n\n\n\nTODO\n\n\n\n\nOther useful links for council report/publications from AFSC and AKFIN?\nContent edit request to Ebett and Matt\nWhich R code to provide if needed"
+  },
+  {
+    "objectID": "ebering.html",
+    "href": "ebering.html",
+    "title": "Sea ice extent in Eastern Bering",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the lastest available data of Eastern Bering. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.11\n0.55\n0.301111111\n0.39\n0.30\n\n\nFeb\n0.11\n0.54\n0.370000000\n0.44\n0.35\n\n\nMar\n0.06\n0.64\n0.395277778\n0.37\n0.33\n\n\nApr\n0.03\n0.58\n0.319722222\n0.24\n0.31\n\n\nMay\n0.00\n0.26\n0.104166667\n0.02\n0.13\n\n\nJun\n0.00\n0.03\n0.003611111\n0.00\n0.00\n\n\nJul\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nAug\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nSep\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nOct\n0.00\n0.00\n0.000000000\n0.00\nNA\n\n\nNov\n0.00\n0.10\n0.030000000\n0.01\nNA\n\n\nDec\n0.00\n0.35\n0.153888889\n0.09\nNA"
+  },
+  {
+    "objectID": "ebering.html#sea-ice-extent-summary",
+    "href": "ebering.html#sea-ice-extent-summary",
+    "title": "Sea ice extent in Eastern Bering",
+    "section": "",
+    "text": "The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km2), where each grid cell exhibits a sea ice concentration of 15% or more.\nThe time series plot and data summary below span from 1985 to the lastest available data of Eastern Bering. The labels (column names) used includes:\n\n“Current Year” (e.g. 2023): The year of the most recent data available.\n“Previous Year” (e.g. 2022): The year immediately preceding the Current Year.\n“Past” (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.\n\nThe Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMonth\nPast (Min)\nPast (Max)\nPast (Mean)\n2022\n2023\n\n\n\n\nJan\n0.11\n0.55\n0.301111111\n0.39\n0.30\n\n\nFeb\n0.11\n0.54\n0.370000000\n0.44\n0.35\n\n\nMar\n0.06\n0.64\n0.395277778\n0.37\n0.33\n\n\nApr\n0.03\n0.58\n0.319722222\n0.24\n0.31\n\n\nMay\n0.00\n0.26\n0.104166667\n0.02\n0.13\n\n\nJun\n0.00\n0.03\n0.003611111\n0.00\n0.00\n\n\nJul\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nAug\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nSep\n0.00\n0.00\n0.000000000\n0.00\n0.00\n\n\nOct\n0.00\n0.00\n0.000000000\n0.00\nNA\n\n\nNov\n0.00\n0.10\n0.030000000\n0.01\nNA\n\n\nDec\n0.00\n0.35\n0.153888889\n0.09\nNA"
+  },
+  {
+    "objectID": "ebering.html#sea-ice-concentration-data",
+    "href": "ebering.html#sea-ice-concentration-data",
+    "title": "Sea ice extent in Eastern Bering",
+    "section": "Sea ice concentration data",
+    "text": "Sea ice concentration data\nThe sea ice extent is calculated using remote sensing data on sea ice concentration from NOAA/NSIDC, made available by PolarWatch. There are two versions of this data: near-real-time and science quality. For the purposes of this data summary, the science quality data were utilized, which are subject to approximately a three-month delay due to quality control processes.\nSea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly"
+  },
+  {
+    "objectID": "ebering.html#data-resources",
+    "href": "ebering.html#data-resources",
+    "title": "Sea ice extent in Eastern Bering",
+    "section": "Data resources",
+    "text": "Data resources\nThe complete time series data from 1978 to present and sample codes in R and Python can be accessed at PolarWatch\n\nData preview and download\nPolarWatch data catalog\n\nFor data assistance, please contact polar.watch@noaa.gov"
+  }
+]
