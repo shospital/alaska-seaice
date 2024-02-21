@@ -1,0 +1,131 @@
+---
+title: "Sea ice extent in Northern Bering"
+format: 
+  html:
+    code-fold: true
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(chartjs)
+library(RColorBrewer)
+library(dplyr)
+
+```
+
+##  Sea ice extent summary
+<img src="img/nbering.png" style="float: right; width: 200px;" alt="Northern Bering">
+
+The sea ice extent is derived from the sea ice concentration remote sensing data.  The sea ice extent is calculated as the total area, measured in square kilometers (km<sup>2</sup>), where each grid cell exhibits a sea ice concentration of 15% or more.
+
+The time series plot and data summary below span from 1985 to the latest available data of Northern Bering.  The labels (column names) used includes:
+
+* "Current Year" (e.g. 2023): The year of the most recent data available.
+* "Previous Year" (e.g. 2022): The year immediately preceding the Current Year.
+* "Past" (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.
+
+The Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+ 
+    dfile_nb = readRDS(file ="iceExt_nb.rds")
+
+    # Current Year
+    currentYear = format(Sys.Date(), "%Y")
+    currentYear = as.numeric(currentYear) - 1
+    lastYear = as.numeric(currentYear) - 1
+
+    # Plot colors (currentYear, lastYear, 3 previous stats)
+    customColors = list(border = c("#F08080", "#318CE7", rep("#eeeeee", 3)),
+                        background = c("#F08080", "#318CE7" , c("#74c476", "#bae4b3", "#edf8e9")),
+                        hover = list(c("#F08080", "#318CE7", border =  c("#74c476", "#bae4b3", "#edf8e9"))))
+
+    dfile <- dfile_nb[dfile_nb$Year!= '1988',]
+    dfile$extent_mil <- round(dfile$extent / 1000000, 2)
+    previous <- dfile %>%
+      filter(YearLabel == "Previous") %>%
+      group_by(MonthName) %>%
+      summarize(
+        min_extent = min(extent_mil),
+        max_extent = max(extent_mil),
+        avg_extent = mean(extent_mil)
+      )
+
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+
+    # Chart
+    chartjs(palette = customColors)%>%
+      cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                 interaction = list(intersect = FALSE, axis= "index"),
+                 plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent')),
+                 scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Millions in KM^2')),
+                               x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
+      )%>%
+
+      cjsLine(labels = month.abb) %>%
+      cjsSeries(data = dfile[dfile$Year == currentYear, ]$extent_mil , label = currentYear) %>%
+      cjsSeries(data = dfile[dfile$Year == lastYear, ]$extent_mil , label = lastYear) %>%
+      cjsSeries(data = previous$max_extent , label = "Past Max") %>%
+      cjsSeries(data = previous$avg_extent , label = "Past Mean") %>%
+      cjsSeries(data = previous$min_extent, label = "Past Min") %>%
+      cjsLegend()
+```
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(gt)
+all_data <- previous %>%
+  left_join(dfile[dfile$Year == lastYear, c("MonthName", "extent_mil") ], by = "MonthName") %>%
+  left_join(dfile[dfile$Year == currentYear, c("MonthName", "extent_mil") ], by = "MonthName") 
+
+
+names(all_data) <- c("Month", "Past (Min)", "Past (Max)", "Past (Mean)", lastYear, currentYear)
+  
+all_data%>%
+  gt%>%
+  tab_options(
+    table.font.size = px(12),  
+    column_labels.font.size = px(15)  
+  )
+```
+
+
+
+## Sea ice concentration data
+
+The sea ice extent is calculated using remote sensing data on sea ice concentration from NOAA/NSIDC, made available by [PolarWatch](https://polarwatch.noaa.gov/). There are two versions of this data: near-real-time and science quality. For the purposes of this data summary, the science quality data were utilized, which are subject to approximately a three-month delay due to quality control processes.
+
+*Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science
+Quality, 1978-Present, Monthly*
+
+
+## Data resources
+
+The complete time series data from 1978 to present and sample codes in R and Python can be accessed at PolarWatch
+
+* [Data preview and download](https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=monthly&var=cdr_seaice_conc_monthly&time_min=2023-09-01T00:00:00Z&time_max=2023-09-01T00:00:00Z&proj=epsg3413&colorBar=KT_ice,,,0,1,)
+* [PolarWatch data catalog](https://polarwatch.noaa.gov/catalog)
+
+
+For data assistance, please contact polar.watch\@noaa.gov

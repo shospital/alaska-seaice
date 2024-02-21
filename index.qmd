@@ -1,11 +1,37 @@
 ---
-title: "sea ice in Alaska"
+title: "Sea Ice in Alaska"
 ---
 
-This is a Quarto website.
+### What is Sea Ice?
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Sea ice is seawater that has frozen and floats in the ocean, forming exclusively within the ocean itself. Unlike sea ice, icebergs, glaciers, and ice shelves originate on land before breaking off and floating in the ocean. In the Arctic, sea ice accumulates in the fall and winter and diminishes in the spring and summer, though it does not vanish entirely.
 
-```{r}
-1 + 1
-```
+### Why is Sea Ice Important?
+
+Sea ice plays profound roles in polar ecosystems, environment, climate and weather.Sea ice is crucial in polar ecosystems, environmental balance and climate, and weather patterns.
+
+During summer, melting sea ice releases essential nutrients into the ocean, sparking the growth of phytoplankton as more sunlight penetrates the water. In winter, the as the sea ice forms, it expels salt, altering the salinity of the water beneath. This saltier water descends, stirring the ocean layers and bringing nutrients to the surface.
+
+The presence of sea ice also modulates coastal condition, dampening the wind and wave impacts. Its reflective surface sends sunlight back into space, playing a key role in climate regulation by reducing heat absorption.
+
+Furthermore, sea ice forms a vital habitat for various Arctic mammals.
+
+-   [Sea Ice on NOAA/NESDIS](https://www.nesdis.noaa.gov/our-environment/ice-snow/sea-ice)
+
+-   [SeaIce on NASA Earth Observatory](https://earthobservatory.nasa.gov/features/SeaIce)
+
+-   [Quick Facts about Sea Ice from NSIDC](https://nsidc.org/learn/parts-cryosphere/sea-ice/quick-facts-about-sea-ice)
+
+### Sea Ice Data: Concentration and Extent
+
+Sea ice concentration is a measurement of the amount of sea ice in a given area and Sea Ice Extent is the total area covered by some amount of ice, including open water between ice floes.
+
+ice extent is typically reported in square kilometers. Extent defines a region as either "ice-covered" or "not ice-covered." A threshold determines this labeling.
+
+A typical threshold is 15 percent, meaning that if the data cell has greater than 15 percent ice concentration, the cell is labeled as "ice-covered." Sea Ice Index products have a threshold of 15 percent. A threshold can also be as high as 30 percent.
+
+-   [More about Sea Ice Extent from NSIDC](https://nsidc.org/learn/ask-scientist/what-difference-between-sea-ice-area-and-extent)
+
+-   [Get Sea Ice Satellite data (NOAA PolarWatch)](https://polarwatch.noaa.gov/)
+
+-   [Tutorial and code for the data](https://polarwatch.noaa.gov/tools-training/code-gallery/)

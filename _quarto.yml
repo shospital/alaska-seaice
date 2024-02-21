@@ -6,13 +6,11 @@ website:
   navbar:
     left:
       - text: "Alaskan Arctic"
-        file: alaskan-arctic.qmd
+        file: arctic.qmd
       - text: "Eastern Bering"
-        file: ebering.md
+        file: ebering.qmd
       - text: "Northern Bering"
-        file: nbering.md
-      - text: "about Sea Ice"
-        file: aboutsic.md
+        file: nbering.qmd
       - text: "ShinyFIN (SST)"
         href: https://shinyfin.psmfc.org/ak-sst-mhw/
 
