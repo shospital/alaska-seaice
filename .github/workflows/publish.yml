@@ -35,6 +35,6 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
-          path: my_report_quarto
+          path: alaska-seaice
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
