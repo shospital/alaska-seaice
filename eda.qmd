@@ -1,0 +1,26 @@
+---
+title: "Data Exploratory Analysis"
+author: "Sunny Hospital"
+---
+
+R Markdown
+
+```{r}
+library(ncdf4)
+library(ggplot2)
+library(dplyr)
+library(raster)
+library(AKmarineareas)
+library(ncdf4.helpers)
+library(here)
+```
+
+Evaluate sea ice data
+
+```{r}
+seaice_raster <- stack(here("scripts", "rawdata","sic85.nc"))
+# 281, 139, 39059, 522  (nrow, ncol, ncell, nlayers)
+
+area_raster <- raster(here("scripts","rawdata","gridcell.nc"))
+# 281, 139 (y, x)
+```

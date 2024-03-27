@@ -11,13 +11,14 @@ format:
 
 The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km<sup>2</sup>), where each grid cell exhibits a sea ice concentration of 15% or more.
 
-The time series plot and data summary below span from 1985 to the lastest available data of the Alaskan Arctic. The labels (column names) used includes:
+The time series plot and data summary below span from 1985 to the lastest available data of the Alaskan Arctic. The labels (column names) used include:
 
 -   "Current Year" (e.g. 2023): The year of the most recent data available.
 -   "Previous Year" (e.g. 2022): The year immediately preceding the Current Year.
 -   "Past" (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.
 
-The Alaska region is made up of 6 distinct ecosystems (fisheries management): the Gulf of Alaska (GOA), Aleutian Islands (AI), Eastern Bering Sea (EBS), the Northern Bering Sea, and Chukchi Sea and Beaufort Sea (referred to here as the Alaskan Arctic).
+The Alaska region is made up of distinct large marine ecosystems across: the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands. No federal fisheries currently occur in the Alaskan Arctic.
+
 
 ```{r}
 #| echo: false
@@ -28,7 +29,6 @@ library(chartjs)
 library(RColorBrewer)
 library(dplyr)
 library(gt)
-
 ```
 
 ```{r}
@@ -54,7 +54,7 @@ library(gt)
 
 
 
-    dfile_arctic = readRDS(file = "iceExt_arctic.rds")
+    dfile_arctic = readRDS(file = "data/iceExt_arctic.rds")
 
     dfile <- dfile_arctic[dfile_arctic$Year!= '1988',]
     dfile$extent_mil <- round(dfile$extent / 1000000, 2)

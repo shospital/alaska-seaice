@@ -23,5 +23,8 @@ format:
     css: styles.css
     toc: true
 
+exclude:
+  - "_scripts/"
+
 editor: visual
 

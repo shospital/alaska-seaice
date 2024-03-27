@@ -1,5 +1,6 @@
 /_site/
 /.quarto/
+/_scripts/
 /.Rproj.user/
 .DS_Store
 .RData
