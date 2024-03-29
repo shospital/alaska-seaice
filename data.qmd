@@ -1,0 +1,24 @@
+---
+title: "How sea ice extent is computed"
+format: 
+  html:
+    code-fold: true
+---
+
+### Sea Ice Extent Workflow
+Sea ice extent is calculated from the sea ice concentration data from NSIDC.
+
+There are two types of data: Science Quality and Near Real Time.  
+* Science Quality data are cleaned data
+* Near Real Time 
+```{mermaid}
+flowchart LR
+  A("Get Science Quality (SQ) Data") --> B(SQ Q/C Data)
+  K("Get Near Real Time (NRT) data") --> C(NRT Q/C Data)
+  B --> D(Merge Data)
+  C --> D(Merge Data)
+  D --> G(Compute Sea ice extent)
+```
+Diagram: Sea Ice Extent Data Workflow
+
+### Data Cleaning
