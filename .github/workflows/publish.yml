@@ -31,7 +31,7 @@ jobs:
             any::RColorBrewer
             any::gt
             local::chartjs
-            any::download_this
+            any::downloadthis
             
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
