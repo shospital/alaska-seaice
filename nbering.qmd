@@ -30,6 +30,8 @@ library(chartjs)
 library(RColorBrewer)
 library(dplyr)
 library(gt)
+library(downloadthis)
+library(ggplot2)
 
     dfile_nb = readRDS(file ="data/iceExt_nb.rds")
 
@@ -53,9 +55,53 @@ library(gt)
         max_extent = max(extent_mil),
         avg_extent = mean(extent_mil)
       )
+```
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+all_data <- previous %>%
+  left_join(dfile[dfile$Year == lastYear, c("MonthName", "extent_mil") ], by = "MonthName") %>%
+  left_join(dfile[dfile$Year == currentYear, c("MonthName", "extent_mil") ], by = "MonthName") 
+
+names(all_data) <- c("Month", "Past (Min)", "Past (Max)", "Past (Mean)", "lastYear", "currentYear")
+#all_data <- all_data %>%
+#  mutate(Month = factor(Month, levels = month.name, ordered = TRUE))
+  
+
+seaice_extent <- ggplot(all_data, aes(x = Month)) +
+  geom_line(aes(y = `Past (Min)`, group = 1), color="#eeeeee", linewidth=1) +
+  geom_line(aes(y = `Past (Max)`, group = 1), color="#eeeeee", linewidth=1) +
+  geom_line(aes(y = `Past (Mean)`, group = 1), color="#eeeeee",  linewidth=1) +
+  geom_line(aes(y = `lastYear`, group = 1, color = "Last Year"),  linewidth=1) +
+  geom_line(aes(y = `currentYear`, group = 1,color = "Current Year" ), linewidth=1) +
+  geom_point(aes(y = `Past (Min)`, group = 1, color = "Past Min")) +
+  geom_point(aes(y = `Past (Max)`, group = 1, color = "Past Max")) +
+  geom_point(aes(y = `Past (Mean)`, group = 1, color = "Past Mean")) +
+  geom_point(aes(y = `lastYear`, group = 1, color = "Last Year")) +
+  geom_point(aes(y = `currentYear`, group = 1, color = "Current Year")) +
+  scale_color_manual(values = c("Past Min" = "#9FE2BF",
+                                "Past Max" = "#008080",
+                                "Past Mean" = "#40E0D0",
+                                "Last Year" = "#318CE7",
+                                "Current Year" = "#F08080")) +
+  labs(title = "Sea Ice Extent",
+       x = "Month",
+       y = "Millions in km squared",
+       color = "Legend") +
+  theme_light() + theme(plot.title = element_text(hjust=0.5))
+
+download_this(
+  seaice_extent,
+  button_label = "Download Plot",
+  button_type = "success",
+  )
+
 
 
 ```
+
 
 ```{r}
 #| echo: false
@@ -81,25 +127,36 @@ library(gt)
       cjsLegend()
 ```
 
+
+
+
+
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
 
-all_data <- previous %>%
-  left_join(dfile[dfile$Year == lastYear, c("MonthName", "extent_mil") ], by = "MonthName") %>%
-  left_join(dfile[dfile$Year == currentYear, c("MonthName", "extent_mil") ], by = "MonthName") 
 
+all_data %>%
+  download_this(
+    output_name = "seaice_extent_nbering",
+    output_extension = ".csv",
+    button_label = "Download Data",
+    button_type = "success",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  ) 
 
-names(all_data) <- c("Month", "Past (Min)", "Past (Max)", "Past (Mean)", lastYear, currentYear)
-  
 all_data%>%
   gt%>%
   tab_options(
     table.font.size = px(12),  
     column_labels.font.size = px(15)  
   )
+
+
 ```
+
 
 ## Sea ice concentration data
 
