@@ -32,6 +32,7 @@ jobs:
             any::gt
             local::chartjs
             any::downloadthis
+            any::reshape2
             
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2

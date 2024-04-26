@@ -10,15 +10,16 @@ format:
 
 <img src="img/nbering.png" alt="Northern Bering" style="float: right; width: 200px;"/>
 
-The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km<sup>2</sup>), where each grid cell exhibits a sea ice concentration of 15% or more.
+The sea ice extent is derived from the sea ice concentration remote sensing data. 
+The sea ice extent is calculated as the total area, measured in square kilometers 
+(km<sup>2</sup>), where each grid cell exhibits a sea ice concentration of 15% or more.
 
-The time series plot and data summary below span from 1985 to the latest available data of Northern Bering. The labels (column names) used includes:
+The Alaska region is made up of distinct large marine ecosystems across: 
+the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), 
+northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). 
+Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands.
+No federal fisheries currently occur in the Alaskan Arctic.
 
--   "Current Year" (e.g. 2023): The year of the most recent data available.
--   "Previous Year" (e.g. 2022): The year immediately preceding the Current Year.
--   "Past" (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.
-
-The Alaska region is made up of distinct large marine ecosystems across: the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands. No federal fisheries currently occur in the Alaskan Arctic.
 ```{r}
 #| echo: false
 #| warning: false
@@ -32,73 +33,141 @@ library(dplyr)
 library(gt)
 library(downloadthis)
 library(ggplot2)
+library(reshape2)
 
-    dfile_nb = readRDS(file ="data/iceExt_nb.rds")
+yearly_df = read.csv("data/nbering_yearly.csv")
+baseline_df = read.csv("data/nbering_baseline.csv")
+dfile = rbind(yearly_df, baseline_df)
 
     # Current Year
     currentYear = format(Sys.Date(), "%Y")
-    currentYear = as.numeric(currentYear) - 1
-    lastYear = as.numeric(currentYear) - 1
+    current <- max(yearly_df$year)
+    last <- max(yearly_df$year) -1 
 
-    # Plot colors (currentYear, lastYear, 3 previous stats)
-    customColors = list(border = c("#F08080", "#318CE7", rep("#eeeeee", 3)),
-                        background = c("#F08080", "#318CE7" , c("#74c476", "#bae4b3", "#edf8e9")),
-                        hover = list(c("#F08080", "#318CE7", border =  c("#74c476", "#bae4b3", "#edf8e9"))))
+    dfile$label = as.character(dfile$year)
+    dfile[dfile$year == 1111,]$label = "Baseline (1985-2015)"
+    dfile$seaice_extent = round(dfile$seaice_extent / 1000000, 2)
 
-    dfile <- dfile_nb[dfile_nb$Year!= '1988',]
-    dfile$extent_mil <- round(dfile$extent / 1000000, 2)
-    previous <- dfile %>%
-      filter(YearLabel == "Previous") %>%
-      group_by(MonthName) %>%
-      summarize(
-        min_extent = min(extent_mil),
-        max_extent = max(extent_mil),
-        avg_extent = mean(extent_mil)
-      )
+
+    var_orders = c(as.character(current), as.character(last),"Baseline (1985-2015)", "1985-2022")
+    plot_colors = c("#318CE7", "#F08080", "#94C973", "#EEEEEE", "#EEEEEE", "#EEEEEE")
+    color_map <- setNames(plot_colors, var_orders)
+ 
+    customColors = list(border = plot_colors,
+                        background = plot_colors)
+
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+
+df_base = dfile[dfile$year %in% c(1111, last:current), c("label", "month", "seaice_extent", "year" )]
+
+df_base.wide = reshape(data=df_base, idvar= "month",
+                    v.names= c("seaice_extent"),
+                    timevar= "label",
+                    direction = "wide")
+names(df_base.wide) <- gsub("seaice_extent.","", names(df_base.wide))
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Find max and min
+pastyears <- dfile[dfile$year <= last -1, ] %>%
+  group_by(month) %>%
+  summarize(
+    min_extent = min(seaice_extent, na.rm = TRUE),
+    max_extent = max(seaice_extent, na.rm = TRUE),
+  ) %>%
+  arrange(month)
 ```
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
 
-all_data <- previous %>%
-  left_join(dfile[dfile$Year == lastYear, c("MonthName", "extent_mil") ], by = "MonthName") %>%
-  left_join(dfile[dfile$Year == currentYear, c("MonthName", "extent_mil") ], by = "MonthName") 
-
-names(all_data) <- c("Month", "Past (Min)", "Past (Max)", "Past (Mean)", "lastYear", "currentYear")
-#all_data <- all_data %>%
-#  mutate(Month = factor(Month, levels = month.name, ordered = TRUE))
-  
-
-seaice_extent <- ggplot(all_data, aes(x = Month)) +
-  geom_line(aes(y = `Past (Min)`, group = 1), color="#eeeeee", linewidth=1) +
-  geom_line(aes(y = `Past (Max)`, group = 1), color="#eeeeee", linewidth=1) +
-  geom_line(aes(y = `Past (Mean)`, group = 1), color="#eeeeee",  linewidth=1) +
-  geom_line(aes(y = `lastYear`, group = 1, color = "Last Year"),  linewidth=1) +
-  geom_line(aes(y = `currentYear`, group = 1,color = "Current Year" ), linewidth=1) +
-  geom_point(aes(y = `Past (Min)`, group = 1, color = "Past Min")) +
-  geom_point(aes(y = `Past (Max)`, group = 1, color = "Past Max")) +
-  geom_point(aes(y = `Past (Mean)`, group = 1, color = "Past Mean")) +
-  geom_point(aes(y = `lastYear`, group = 1, color = "Last Year")) +
-  geom_point(aes(y = `currentYear`, group = 1, color = "Current Year")) +
-  scale_color_manual(values = c("Past Min" = "#9FE2BF",
-                                "Past Max" = "#008080",
-                                "Past Mean" = "#40E0D0",
-                                "Last Year" = "#318CE7",
-                                "Current Year" = "#F08080")) +
-  labs(title = "Sea Ice Extent",
+# Plot
+df_base$month <- factor(df_base$month, levels = 1:12)
+ice_ext_plot <- df_base %>%  
+  ggplot( aes(x=month, y=seaice_extent, group=as.character(label), color=as.character(label))) +
+    geom_point() +
+    geom_line(data=dfile[dfile$year <= last -1, ], aes(x=month, y=seaice_extent), color='#eeeeee', label = "1985-2022") +
+    geom_line(data = subset(df_base, label == var_orders[3] ),linewidth=1) +
+    geom_line(aes(color = "1985-2022"), linewidth =0) +
+    geom_line(data = subset(df_base, label == var_orders[2] ),linewidth=1) +
+    geom_line(data = subset(df_base, label == var_orders[1]),linewidth=1) +
+    labs(title = "Sea Ice Extent",
        x = "Month",
        y = "Millions in km squared",
-       color = "Legend") +
-  theme_light() + theme(plot.title = element_text(hjust=0.5))
+       color = "") +
+    scale_color_manual(values=color_map) +
+    theme_light() + theme(plot.title = element_text(hjust=0.5), legend.position="top") 
+
+``` 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 
 download_this(
-  seaice_extent,
+  ice_ext_plot,
   button_label = "Download Plot",
   button_type = "success",
   )
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+     # Chart
 
 
+  chartjs(palette = customColors) %>%
+    cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                interaction = list(intersect = FALSE, axis= "index"),
+                plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent')),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Millions in KM^2')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
+    )%>%
+    cjsLine(labels = month.abb) %>%
+    cjsSeries(data = dfile[dfile$year == current, ]$seaice_extent , label = var_orders[1]) %>%
+    cjsSeries(data = dfile[dfile$year == last, ]$seaice_extent , label = var_orders[2]) %>%
+    cjsSeries(data = dfile[dfile$year == 1111, ]$seaice_extent , label = var_orders[3]) %>%
+    cjsSeries(data = pastyears$min_extent , label = sprintf("Min: (1985-%4d)", last-1)) %>%
+    cjsSeries(data = pastyears$max_extent , label = sprintf("Max: (1985-%4d)", last-1)) %>%
+    cjsLegend()
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$seaice_extent) * 10000000
+  anom_colors = list(border = c( "#4bc19a", "#CCCCCC"),
+                        background = c("#4bc19a", "#CCCCCC"))
+  #  ANOMALY Chart
+  chartjs(palette = anom_colors) %>%
+    cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                interaction = list(intersect = FALSE, axis= "index"),
+                plugins = list(title = list(display = TRUE, text = sprintf("Year %4d Sea Ice Extent Anomaly", last))),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'KM^2')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
+    )%>%
+    cjsLine(labels = month.abb) %>%
+    cjsSeries(data =anom , label = sprintf("Extent (%4d) - Baseline", last)) %>%
+    cjsSeries(data =replicate(length(anom), 0) , label = "No Change") %>%
+    cjsLegend()
 
 ```
 
@@ -109,54 +178,35 @@ download_this(
 #| message: false
 
 
-    # Chart
-    chartjs(palette = customColors)%>%
-      cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
-                 interaction = list(intersect = FALSE, axis= "index"),
-                 plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent')),
-                 scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Millions in KM^2')),
-                               x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
-      )%>%
-
-      cjsLine(labels = month.abb) %>%
-      cjsSeries(data = dfile[dfile$Year == currentYear, ]$extent_mil , label = currentYear) %>%
-      cjsSeries(data = dfile[dfile$Year == lastYear, ]$extent_mil , label = lastYear) %>%
-      cjsSeries(data = previous$max_extent , label = "Past Max") %>%
-      cjsSeries(data = previous$avg_extent , label = "Past Mean") %>%
-      cjsSeries(data = previous$min_extent, label = "Past Min") %>%
-      cjsLegend()
-```
+download_this(
+  dfile,
+  output_name = "seaice_extent_nbering",
+  output_extension = ".csv",
+  button_label = "Download Data",
+  delimiter = ",",   
+  quote = TRUE,
+  button_type = "success"
+)
 
 
-
-
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-
-all_data %>%
-  download_this(
-    output_name = "seaice_extent_nbering",
-    output_extension = ".csv",
-    button_label = "Download Data",
-    button_type = "success",
-    has_icon = TRUE,
-    icon = "fa fa-save"
-  ) 
-
-all_data%>%
+df_base.wide %>%
   gt%>%
   tab_options(
     table.font.size = px(12),  
     column_labels.font.size = px(15)  
   )
+```
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+#ice_ext_plot
 
 ```
 
+ 
 
 ## Sea ice concentration data
 

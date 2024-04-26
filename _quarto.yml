@@ -17,11 +17,18 @@ website:
       - text: "PolarWatch"
         href: https://polarwatch.noaa.gov
 
+    right:
+      - icon: github
+        href: https://github.com/shospital/alaska-seaice
 format:
   html:
+    grid:
+      sidebar-width: 100px
+      body-width: 1000px
     theme: flatly
     css: styles.css
     toc: true
+
 
 exclude:
   - "_scripts/"
