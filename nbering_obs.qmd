@@ -61,13 +61,12 @@ last <- max(yearly_df$year) -1
 
 
     var_orders = c(as.character(current), as.character(last),"Mean (1985-2015)", "1985-2022")
-    plot_colors = c("#318CE7", "#F08080", "#94C973", "#cccccc", "#cccccc", "#cccccc")
+    plot_colors = c("#318CE7", "#F08080", "#94C973", "#EEEEEE", "#EEEEEE", "#EEEEEE")
     color_map <- setNames(plot_colors, var_orders)
  
     customColors = list(border = plot_colors,
                         background = plot_colors)
 
-region_title <- "Northern Bering"
 ```
 
 
@@ -106,7 +105,7 @@ pastyears <- dfile[dfile$year <= last -1, ] %>%
 #| warning: false
 #| message: false
 
-# Sea Ice Extent Plot
+# Plot
 df_base$month <- factor(df_base$month, levels = 1:12)
 ice_ext_plot <- df_base %>%  
   ggplot( aes(x=month, y=seaice_extent, group=as.character(label), color=as.character(label))) +
@@ -116,44 +115,14 @@ ice_ext_plot <- df_base %>%
     geom_line(aes(color = "1985-2022"), linewidth =0) +
     geom_line(data = subset(df_base, label == var_orders[2] ),linewidth=1) +
     geom_line(data = subset(df_base, label == var_orders[1]),linewidth=1) +
-    labs(title = paste0("Monthly Sea Ice Extent: ", region_title),
+    labs(title = "Sea Ice Extent",
        x = "Month",
        y = "Million square km",
        color = "") +
     scale_color_manual(values=color_map) +
     theme_light() + theme(plot.title = element_text(hjust=0.5), legend.position="top") 
- 
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$seaice_extent) * 10000000
-  anom_colors = list(border = c( "#205B48", "#eeeeee"),
-                        background = c("#205B48", "#eeeeee"))
-
-
-anom.df <- data.frame(extent_anomaly = round(anom, 2), month = factor(x = rep(1:12, each = length(anom)/12)))
-
-anom_plot <-
-  ggplot(data=anom.df, aes(x=month, y=extent_anomaly, group=1)) +
-  geom_line(color="green", size=1.2)+
-  geom_point() +
-  geom_hline(yintercept=0)+
-  labs(title = paste0("Year ", last, " Sea ice extent anomaly: ", region_title),
-    x = "Month",
-    y = "Square km")+
-  theme_light() + theme(plot.title = element_text(hjust=0.5), legend.position="top") 
-
 
 ``` 
-
-Figure. Monthly sea ice extent chart shows for the most current year, previous year, baseline 
-(average extent from 1985-2015) and monthly minimum and maximum values from the previous years.
- (Data source: NOAA/NSIDC/PolarWatch)
-
-:::{layout-ncol="6"}
 ```{r}
 #| echo: false
 #| warning: false
@@ -162,97 +131,52 @@ Figure. Monthly sea ice extent chart shows for the most current year, previous y
 download_this(
   ice_ext_plot,
   button_label = "Download Plot",
-  button_type = "info",
-  )
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-download_this(
-  anom.df,
-  button_label = "Download Data",
   button_type = "success",
   )
-
 ```
-:::
 
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
-
      # Chart
 
 
   chartjs(palette = customColors) %>%
     cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
                 interaction = list(intersect = FALSE, axis= "index"),
-                plugins = list(legend=list(labels=list(font=list(size=15))), title = list(font=list(size=15), display = TRUE, text = paste0('Monthly Sea Ice Extent: ', region_title))),
-                scales = list(y = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Million square km')),
-                              x = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Month')))
+                plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent')),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Million square km')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
     )%>%
     cjsLine(labels = month.abb) %>%
     cjsSeries(data = dfile[dfile$year == current, ]$seaice_extent , label = var_orders[1]) %>%
     cjsSeries(data = dfile[dfile$year == last, ]$seaice_extent , label = var_orders[2]) %>%
     cjsSeries(data = dfile[dfile$year == 1111, ]$seaice_extent , label = var_orders[3]) %>%
     cjsSeries(data = pastyears$min_extent , label = sprintf("Min: (1985-%4d)", last-1)) %>%
-    cjsSeries(data = pastyears$max_extent , label = sprintf("Max: (1985-%4d)", last-1))
-
-    
+    cjsSeries(data = pastyears$max_extent , label = sprintf("Max: (1985-%4d)", last-1)) %>%
+    cjsLegend()
 
 ```
+Data Source: NOAA/NSIDC Sea Ice Concentration NSIDC Climate Data Record V4 and Near-Real-Time V2, Arctic <br/>
+Statistics/Figure Source : NOAA CoastWatch PolarWatch 
 
-:::{layout-ncol="6"}
-
- 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-download_this(
-  anom_plot,
-  button_label = "Download Plot",
-  button_type = "info",
-  )
-```
- 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-download_this(
-  anom_plot,
-  button_label = "Download Data",
-  button_type = "success",
-  )
-```
-:::
- 
- 
 
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
-
-
 
 anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$seaice_extent) * 10000000
-  anom_colors = list(border = c( "#205B48", "#CCCCCC"),
-                        background = c("#205B48", "#CCCCCC"))
+  anom_colors = list(border = c( "#4bc19a", "#CCCCCC"),
+                        background = c("#4bc19a", "#CCCCCC"))
   #  ANOMALY Chart
   chartjs(palette = anom_colors) %>%
     cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
                 interaction = list(intersect = FALSE, axis= "index"),
-                plugins = list(legend=list(labels=list(font=list(size=15))),title = list(font=list(size=15),display = TRUE, text = sprintf("Year %4d Sea Ice Extent Anomaly", last))),
-                scales = list(y = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Square km')),
-                              x = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Month')))
+                plugins = list(title = list(display = TRUE, text = sprintf("Year %4d Sea Ice Extent Anomaly", last))),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Square km')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
     )%>%
     cjsLine(labels = month.abb) %>%
     cjsSeries(data =anom , label = sprintf("Extent (%4d) - Mean (1985-2015)", last)) %>%
@@ -261,7 +185,7 @@ anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$
 
 ```
 
- 
+hahaha
 
 ```{r}
 #| echo: false
@@ -272,20 +196,48 @@ anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$
 
 
   # table on the left
-#datatable(df_base.wide)
+datatable(df_base)
+```
+
+```{ojs}
+
+data = FileAttachment("data/nbering_yearly.csv")
+  .csv({ typed: true })
+
+base = FileAttachment("data/nbering_baseline.csv")
+  .csv({ typed: true })
+
+filtered = data.filter(function(d) {
+  return year == d.year 
+})
+
+```
+
+```{ojs}
+viewof year = Inputs.range(
+  [1985, 2024], 
+  {value: 2020, step: 1, label: "Year:"}
+)
+
+```
+```{ojs}
+
+Plot.plot({
+  marks: [
+    Plot.line(filtered, 
+      { x: "month", y: "seaice_extent"}, 
+      { stroke: "pink" }
+    ),
+    Plot.line(base, 
+      { x: "month", y: "seaice_extent"}, 
+      { stroke : "green" }
+    )
+  ]
+})
 
 
 ```
 
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-#ice_ext_plot
-
-```
 
 Data Source: NOAA/NSIDC Sea Ice Concentration NSIDC Climate Data Record V4 and Near-Real-Time V2, Arctic <br/>
 Statistics/Figure Source : NOAA CoastWatch PolarWatch 
@@ -301,3 +253,4 @@ NOAA's Annual Arctic Report Card
 ## Credit and Citations
 
 * [Contributions and citations](citations.html)
+
