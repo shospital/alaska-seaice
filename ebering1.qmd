@@ -1,5 +1,5 @@
 ---
-title: "Sea ice extent in Northern Bering"
+title: "Sea ice extent in eastern Bering"
 format: 
   html:
     code-fold: true
@@ -8,7 +8,7 @@ format:
 
 > Updated on `r format(Sys.Date(), '%B %d, %Y')`
 
-<img src="img/nbering.png" alt="Northern Bering" style="float: right; width: 200px;"/>
+<img src="img/ebering.png" alt="Eastern Bering" style="float: right; width: 200px;"/>
 
 
 The time series plot and data summary below present statistics on sea ice extent within northern Bering Sea
@@ -20,7 +20,11 @@ computed from the remote sensing data from NOAA/NSIDC on PolarWatch:
 
 The Alaska region is made up of distinct large marine ecosystems across: the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands. No federal fisheries currently occur in the Alaskan Arctic.
 
-More information about the data and sea ice extent calculation can be found on [Sea Ice Extent page](extent.html).
+For information about the time series, please click on the following links:
+
+* [How regions are divided?](seaice.html#the-alaska-region)
+* [What is sea ice extent and how it is calculated?](data.html)
+* [Which satellite data were used to calculate sea ice extent?](seaice.html)
 
 
 
@@ -169,7 +173,7 @@ anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$
     cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
                 interaction = list(intersect = FALSE, axis= "index"),
                 plugins = list(title = list(display = TRUE, text = sprintf("Year %4d Sea Ice Extent Anomaly", last))),
-                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Square km')),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'KM^2')),
                               x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
     )%>%
     cjsLine(labels = month.abb) %>%
@@ -186,6 +190,15 @@ anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$
 #| message: false
 
 
+download_this(
+  dfile,
+  output_name = "seaice_extent_nbering",
+  output_extension = ".csv",
+  button_label = "Download Data",
+  delimiter = ",",   
+  quote = TRUE,
+  button_type = "success"
+)
 
 
 df_base.wide %>%

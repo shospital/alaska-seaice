@@ -5,71 +5,64 @@ format:
     code-fold: true
 ---
 
-## Sea ice extent summary
+
+> Updated on `r format(Sys.Date(), '%B %d, %Y')`
 
 <img src="img/arctic.png" alt="Alaskan Arctic" style="float: right; width: 200px;"/>
 
-The sea ice extent is derived from the sea ice concentration remote sensing data. The sea ice extent is calculated as the total area, measured in square kilometers (km<sup>2</sup>), where each grid cell exhibits a sea ice concentration of 15% or more.
 
-The time series plot and data summary below span from 1985 to the lastest available data of the Alaskan Arctic. The labels (column names) used include:
+The time series plot and data summary below present statistics on sea ice extent within Alaskan Arctic Sea
+computed from the remote sensing data from NOAA/NSIDC on PolarWatch:
 
--   "Current Year" (e.g. 2023): The year of the most recent data available.
--   "Previous Year" (e.g. 2022): The year immediately preceding the Current Year.
--   "Past" (e.g. 1985 - 2021): The years ranging from 1985 up to, but not including, the Previous Year.
+* Mean (1985-2015): Represents the average sea ice extent from 1985 to 2015.
+* Max and Min (1985-2022): Reflect the highest and lowest monthly sea ice extents from 1985 to 2022.
+* Current and Previous Year: Show the monthly sea ice extent values for the current and previous year within the area.
 
 The Alaska region is made up of distinct large marine ecosystems across: the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands. No federal fisheries currently occur in the Alaskan Arctic.
+
+More information about the data and sea ice extent calculation can be found on [Sea Ice Extent page](extent.html).
+
+
 
 
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
+#| results: 'hide'
 
+ 
 library(chartjs)
 library(RColorBrewer)
 library(dplyr)
 library(gt)
-```
+library(downloadthis)
+library(ggplot2)
+library(reshape2)
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
+yearly_df = read.csv("data/alaskan_arctic_yearly.csv")
+baseline_df = read.csv("data/alaskan_arctic_baseline.csv")
+dfile = rbind(yearly_df, baseline_df)
 
-    # Current Year
-    currentYear = format(Sys.Date(), "%Y")
-    currentYear = as.numeric(currentYear) - 1
-    lastYear = as.numeric(currentYear) - 1
+# Current Year
+currentYear = format(Sys.Date(), "%Y")
+current <- max(yearly_df$year)
+last <- max(yearly_df$year) -1 
 
-    # Plot colors (currentYear, lastYear, 3 previous stats)
-    customColors = list(border = c("#F08080", "#318CE7", rep("#eeeeee", 3)),
-                        background = c("#F08080", "#318CE7" , c("#74c476", "#bae4b3", "#edf8e9")),
-                        hover = list(c("#F08080", "#318CE7", border =  c("#74c476", "#bae4b3", "#edf8e9"))))
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
+    dfile$label = as.character(dfile$year)
+    dfile[dfile$year == 1111,]$label = "Mean (1985-2015)"
+    dfile$seaice_extent = round(dfile$seaice_extent / 1000000, 2)
 
 
-
-    dfile_arctic = readRDS(file = "data/iceExt_arctic.rds")
-
-    dfile <- dfile_arctic[dfile_arctic$Year!= '1988',]
-    dfile$extent_mil <- round(dfile$extent / 1000000, 2)
-    previous <- dfile %>%
-      filter(YearLabel == "Previous") %>%
-      group_by(MonthName) %>%
-      summarize(
-        min_extent = min(extent_mil),
-        max_extent = max(extent_mil),
-        avg_extent = round(mean(extent_mil),2)
-      )
-
-    
+    var_orders = c(as.character(current), as.character(last),"Mean (1985-2015)", "1985-2022")
+    plot_colors = c("#318CE7", "#F08080", "#94C973", "#EEEEEE", "#EEEEEE", "#EEEEEE")
+    color_map <- setNames(plot_colors, var_orders)
+ 
+    customColors = list(border = plot_colors,
+                        background = plot_colors)
 
 ```
+
 
 ```{r}
 #| echo: false
@@ -77,22 +70,14 @@ library(gt)
 #| message: false
 
 
-    # Chart
-    chartjs(palette = customColors)%>%
-      cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
-                 interaction = list(intersect = FALSE, axis= "index"),
-                 plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent in Alaskan Arctic')),
-                 scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Millions in km^2')),
-                               x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
-      )%>%
+df_base = dfile[dfile$year %in% c(1111, last:current), c("label", "month", "seaice_extent", "year" )]
 
-      cjsLine(labels = month.abb) %>%
-      cjsSeries(data = dfile[dfile$Year == currentYear, ]$extent_mil , label = currentYear) %>%
-      cjsSeries(data = dfile[dfile$Year == lastYear, ]$extent_mil , label = lastYear) %>%
-      cjsSeries(data = previous$max_extent , label = "Past Max") %>%
-      cjsSeries(data = previous$avg_extent , label = "Past Mean") %>%
-      cjsSeries(data = previous$min_extent, label = "Past Min") %>%
-      cjsLegend()
+df_base.wide = reshape(data=df_base, idvar= "month",
+                    v.names= c("seaice_extent"),
+                    timevar= "label",
+                    direction = "wide")
+names(df_base.wide) <- gsub("seaice_extent.","", names(df_base.wide))
+
 ```
 
 ```{r}
@@ -100,14 +85,111 @@ library(gt)
 #| warning: false
 #| message: false
 
-all_data <- previous %>%
-  left_join(dfile[dfile$Year == lastYear, c("MonthName", "extent_mil") ], by = "MonthName") %>%
-  left_join(dfile[dfile$Year == currentYear, c("MonthName", "extent_mil") ], by = "MonthName") 
+# Find max and min
+pastyears <- dfile[dfile$year <= last -1, ] %>%
+  group_by(month) %>%
+  summarize(
+    min_extent = min(seaice_extent, na.rm = TRUE),
+    max_extent = max(seaice_extent, na.rm = TRUE),
+  ) %>%
+  arrange(month)
+```
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Plot
+df_base$month <- factor(df_base$month, levels = 1:12)
+ice_ext_plot <- df_base %>%  
+  ggplot( aes(x=month, y=seaice_extent, group=as.character(label), color=as.character(label))) +
+    geom_point() +
+    geom_line(data=dfile[dfile$year <= last -1, ], aes(x=month, y=seaice_extent), color='#eeeeee', label = "1985-2022") +
+    geom_line(data = subset(df_base, label == var_orders[3] ),linewidth=1) +
+    geom_line(aes(color = "1985-2022"), linewidth =0) +
+    geom_line(data = subset(df_base, label == var_orders[2] ),linewidth=1) +
+    geom_line(data = subset(df_base, label == var_orders[1]),linewidth=1) +
+    labs(title = "Sea Ice Extent",
+       x = "Month",
+       y = "Million square km",
+       color = "") +
+    scale_color_manual(values=color_map) +
+    theme_light() + theme(plot.title = element_text(hjust=0.5), legend.position="top") 
+
+``` 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+download_this(
+  ice_ext_plot,
+  button_label = "Download Plot",
+  button_type = "success",
+  )
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+     # Chart
 
 
-names(all_data) <- c("Month", "Past (Min)", "Past (Max)", "Past (Mean)", lastYear, currentYear)
-  
-all_data%>%
+  chartjs(palette = customColors) %>%
+    cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                interaction = list(intersect = FALSE, axis= "index"),
+                plugins = list(title = list(display = TRUE, text = 'Sea Ice Extent')),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Million square km')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
+    )%>%
+    cjsLine(labels = month.abb) %>%
+    cjsSeries(data = dfile[dfile$year == current, ]$seaice_extent , label = var_orders[1]) %>%
+    cjsSeries(data = dfile[dfile$year == last, ]$seaice_extent , label = var_orders[2]) %>%
+    cjsSeries(data = dfile[dfile$year == 1111, ]$seaice_extent , label = var_orders[3]) %>%
+    cjsSeries(data = pastyears$min_extent , label = sprintf("Min: (1985-%4d)", last-1)) %>%
+    cjsSeries(data = pastyears$max_extent , label = sprintf("Max: (1985-%4d)", last-1)) %>%
+    cjsLegend()
+
+```
+Data Source: NOAA/NSIDC Sea Ice Concentration NSIDC Climate Data Record V4 and Near-Real-Time V2, Arctic <br/>
+Statistics/Figure Source : NOAA CoastWatch PolarWatch 
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+anom = (dfile[dfile$year == last, ]$seaice_extent - dfile[dfile$year == 1111, ]$seaice_extent) * 10000000
+  anom_colors = list(border = c( "#4bc19a", "#CCCCCC"),
+                        background = c("#4bc19a", "#CCCCCC"))
+  #  ANOMALY Chart
+  chartjs(palette = anom_colors) %>%
+    cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                interaction = list(intersect = FALSE, axis= "index"),
+                plugins = list(title = list(display = TRUE, text = sprintf("Year %4d Sea Ice Extent Anomaly", last))),
+                scales = list(y = list(display = TRUE, title = list(display = TRUE, text = 'Square km')),
+                              x = list(display = TRUE, title = list(display = TRUE, text = 'Month')))
+    )%>%
+    cjsLine(labels = month.abb) %>%
+    cjsSeries(data =anom , label = sprintf("Extent (%4d) - Mean (1985-2015)", last)) %>%
+    cjsSeries(data =replicate(length(anom), 0) , label = "No Change") %>%
+    cjsLegend()
+
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+
+ 
+
+
+df_base.wide %>%
   gt%>%
   tab_options(
     table.font.size = px(12),  
@@ -115,26 +197,26 @@ all_data%>%
   )
 ```
 
-## Sea ice concentration data
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 
-The sea ice extent is calculated using remote sensing data on sea ice concentration from NOAA/NSIDC, made available by [PolarWatch](https://polarwatch.noaa.gov/). There are two versions of this data: near-real-time and science quality. For the purposes of this data summary, the science quality data were utilized, which are subject to approximately a three-month delay due to quality control processes.
+#ice_ext_plot
 
-**Data** : Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly
+```
 
-## Resources
+Data Source: NOAA/NSIDC Sea Ice Concentration NSIDC Climate Data Record V4 and Near-Real-Time V2, Arctic <br/>
+Statistics/Figure Source : NOAA CoastWatch PolarWatch 
 
-The complete time series data from 1978 to present and sample codes in R and Python can be accessed at PolarWatch
+## More resources
 
--   [Data preview and download sea ice concentration](https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=monthly&var=cdr_seaice_conc_monthly&time_min=2023-09-01T00:00:00Z&time_max=2023-09-01T00:00:00Z&proj=epsg3413&colorBar=KT_ice,,,0,1,)
--   [PolarWatch data catalog](https://polarwatch.noaa.gov/catalog)
--   [Council Report?]()
+NOAA's Annual Arctic Report Card
 
-::: {.callout-tip title="Assistance"}
-For data assistance, please contact polar.watch\@noaa.gov
-:::
+  * [Official Arctic Report Card Page](https://arctic.noaa.gov/report-card/report-card-2023/videos-and-animations-2023/)
+  * [2-Pager Fact sheet](https://docs.google.com/presentation/d/1TaKzJqPx-OeYcCZZLVqcPx0n4ilq7NKBaG1Qfwp-anE/edit#slide=id.g192e9543f73_0_16)
 
-::: {.callout-warning title="TODO"}
--   Other useful links for council report/publications from AFSC and AKFIN?
--   Content edit request to Ebett and Matt
--   Which R code to provide if needed
-:::
+
+## Credit and Citations
+
+* [Contributions and citations](citations.html)
