@@ -217,6 +217,6 @@ NOAA's Annual Arctic Report Card
   * [2-Pager Fact sheet](https://docs.google.com/presentation/d/1TaKzJqPx-OeYcCZZLVqcPx0n4ilq7NKBaG1Qfwp-anE/edit#slide=id.g192e9543f73_0_16)
 
 
-## Credit and Citations
+## Contributions and Citations
 
 * [Contributions and citations](citations.html)

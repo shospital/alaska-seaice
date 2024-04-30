@@ -4,8 +4,8 @@
 ### Contributors
 
 * Sun Hospital, PolarWatch Operations Manager at PolarWatch, NOAA CoastWatch, UCSC Fisheries Cooperative Program
-* Ebett, NOAA Alaska Fisheries Science Center
-* Ludovic, NOAA NESDIS STAR 
+* Elizabeth Siddon, NOAA Alaska Fisheries Science Center
+* Ludovic Brucker, NOAA NESDIS Center for Satellite Applications & Research
 * Matt Calahan, Alaska Fisheries Information Network 
 
 ### Citations
@@ -15,7 +15,6 @@
 NOAA/NSIDC. (n.d.). Climate Data Record of Passive Microwave Sea Ice Concentration, Version 4. DATA SET ID: G02202. https://doi.org/10.7265/EFMZ-2T65
 
 Callahan, M. (2023/12/1). AKmarineareas: Management relevent spatial data for Alaska marine areas. Retrieved from https://github.com/MattCallahan-NOAA/AKmarineareas/
-
 
 
 
@@ -34,4 +33,12 @@ Hoyer, S., & Hamman, J. (n.d.). xarray: N-D labeled arrays and datasets in Pytho
 
 Chamberlain, S. (n.d.). rerddap: General purpose client for ERDDAP servers. Retrieved from https://github.com/ropensci/rerddap
 
-Quarto Authors (Year). Quarto: An Open-Source Scientific and Technical Publishing System Built on Pandoc. Retrieved from https://github.com/quarto-dev/quarto-cli
+Quarto Authors (n.d). Quarto: An Open-Source Scientific and Technical Publishing System Built on Pandoc. Retrieved from https://github.com/quarto-dev/quarto-cli
+
+Chart.js Downie N. et al. (2023). Chart.js: Simple yet flexible JavaScript charting for designers & developers. Retrieved from https://www.chartjs.org/
+
+:::{.callout-info}
+to-do: add chartjs htmlwidget
+
+:::
+
