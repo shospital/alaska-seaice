@@ -49,5 +49,5 @@ flowchart LR
 
 ### Sea Ice Extent Code 
 
-The sea ice extent code used to compute statistics is availabe on Github. 
+The sea ice extent code used to compute statistics is available on Github.
 Please check zenodo for citations.
