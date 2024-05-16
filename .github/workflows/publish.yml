@@ -34,6 +34,7 @@ jobs:
             any::downloadthis
             any::reshape2
             any::DT
+            any::plotly
             
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
