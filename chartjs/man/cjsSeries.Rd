@@ -10,19 +10,61 @@
 \alias{cjsSeries.cjs_polarArea}
 \title{Add a series to a chart}
 \usage{
-cjsSeries(cjs, data, type, label, scale)
+cjsSeries(cjs, data, type, borderDash, label, scale)
 
-\method{cjsSeries}{cjs_bar}(cjs, data, type = "bar", label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_bar}(
+  cjs,
+  data,
+  type = "bar",
+  borderDash = NULL,
+  label = NULL,
+  scale = NULL
+)
 
-\method{cjsSeries}{cjs_line}(cjs, data, type = "line", label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_line}(
+  cjs,
+  data,
+  type = "line",
+  borderDash = NULL,
+  label = NULL,
+  scale = NULL
+)
 
-\method{cjsSeries}{cjs_horizontalBar}(cjs, data, type = "horizontalBar", label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_horizontalBar}(
+  cjs,
+  data,
+  borderDash = NULL,
+  type = "horizontalBar",
+  label = NULL,
+  scale = NULL
+)
 
-\method{cjsSeries}{cjs_radar}(cjs, data, type = NULL, label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_radar}(
+  cjs,
+  data,
+  type = NULL,
+  borderDash = NULL,
+  label = NULL,
+  scale = NULL
+)
 
-\method{cjsSeries}{cjs_pie}(cjs, data, type = NULL, label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_pie}(
+  cjs,
+  data,
+  type = NULL,
+  borderDash = NULL,
+  label = NULL,
+  scale = NULL
+)
 
-\method{cjsSeries}{cjs_polarArea}(cjs, data, type = NULL, label = NULL, scale = NULL)
+\method{cjsSeries}{cjs_polarArea}(
+  cjs,
+  data,
+  type = NULL,
+  borderDash = NULL,
+  label = NULL,
+  scale = NULL
+)
 }
 \arguments{
 \item{cjs}{a \code{\link{chartjs}} object}
@@ -30,6 +72,8 @@ cjsSeries(cjs, data, type, label, scale)
 \item{data}{a vector of data}
 
 \item{type}{a character or NULL, the representation of the data,}
+
+\item{borderDash}{an optional list of size}
 
 \item{label}{a character, the name of the series}
 

@@ -35,7 +35,7 @@ Chamberlain, S. (n.d.). rerddap: General purpose client for ERDDAP servers. Retr
 
 Quarto Authors (n.d). Quarto: An Open-Source Scientific and Technical Publishing System Built on Pandoc. Retrieved from https://github.com/quarto-dev/quarto-cli
 
-Chart.js Downie N. et al. (2023). Chart.js: Simple yet flexible JavaScript charting for designers & developers. Retrieved from https://www.chartjs.org/
+Chart.js Downie N. et al. (2023). Chart.js (v4.4.1): Simple yet flexible JavaScript charting for designers & developers. Retrieved from https://www.chartjs.org/
 
 :::{.callout-info}
 to-do: add chartjs htmlwidget
