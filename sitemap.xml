@@ -2,58 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://shospital.github.io/alaska-seaice/extent.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/arctic1.html</loc>
+    <lastmod>2024-05-16T16:36:31.017Z</lastmod>
   </url>
   <url>
     <loc>https://shospital.github.io/alaska-seaice/data.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/index.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/regions.html</loc>
-    <lastmod>2024-05-13T17:58:51.838Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/chartjs/inst/htmlwidgets/lib/Chart.js-4.4.1/LICENSE.html</loc>
-    <lastmod>2024-05-13T17:58:51.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/seaice.html</loc>
-    <lastmod>2024-05-13T17:58:51.838Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/arctic.html</loc>
-    <lastmod>2024-05-13T17:58:51.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/ebering.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/nbering_obs.html</loc>
-    <lastmod>2024-05-13T17:58:51.838Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/chartjs/NEWS.html</loc>
-    <lastmod>2024-05-13T17:58:51.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/about.html</loc>
-    <lastmod>2024-05-13T17:58:51.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/citations.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
-  </url>
-  <url>
-    <loc>https://shospital.github.io/alaska-seaice/nbering.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
   </url>
   <url>
     <loc>https://shospital.github.io/alaska-seaice/ebering1.html</loc>
-    <lastmod>2024-05-13T17:58:51.826Z</lastmod>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/index.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/chartjs/NEWS.html</loc>
+    <lastmod>2024-05-16T16:36:31.021Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/about.html</loc>
+    <lastmod>2024-05-16T16:36:31.017Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/nbering_obs.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/nbering.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/regions.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/chartjs/inst/htmlwidgets/lib/Chart.js-4.4.1/LICENSE.html</loc>
+    <lastmod>2024-05-16T16:36:31.021Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/citations.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/arctic.html</loc>
+    <lastmod>2024-05-16T16:36:31.017Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/seaice.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://shospital.github.io/alaska-seaice/ebering.html</loc>
+    <lastmod>2024-05-16T16:36:31.057Z</lastmod>
   </url>
 </urlset>
