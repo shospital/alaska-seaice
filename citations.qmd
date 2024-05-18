@@ -25,7 +25,7 @@ NOAA/CoastWatch PolarWatch. (n.d.). Data Access and Visualization of Climate Dat
 
 **Statistics and Plots**
 
-NOAA/CoastWatch PolarWatch. (n.d.). Sea ice extent time series for Alaska region. Retrieved from https://polarwatch.github.com/polarwatch/alaska-seaice  [zenodo]()
+NOAA/CoastWatch PolarWatch. (n.d.). Sea ice extent time series for Alaska region. Retrieved from https://polarwatch.github.com/polarwatch/alaska-seaice  [github]()
 
 **Software**
 

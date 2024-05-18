@@ -6,7 +6,6 @@
 #' @param height the height of the widget
 #' @param palette either the name of a RColorBrewer palette or a list of custom colours as specified in \code{\link{colorTypes}}
 #' @param debug if TRUE, prints information to the JS console
-#'
 #' @import htmlwidgets
 #' @import htmltools
 #'

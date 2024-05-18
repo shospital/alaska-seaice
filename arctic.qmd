@@ -15,7 +15,7 @@ The time series plot and data summary below present statistics on sea ice extent
 computed from the remote sensing data from NOAA/NSIDC on PolarWatch:
 
 * Mean (1985-2015): Represents the average sea ice extent from 1985 to 2015.
-* Max and Min (1985-2022): Reflect the highest and lowest monthly sea ice extents from 1985 to 2022.
+* Upper and Lower Bounds of Error Band (1985-2015): Reflect the uncertainty of the Mean (1985 to 2015).
 * Current and Previous Year: Show the monthly sea ice extent values for the current and previous year within the area.
 
 The Alaska region is made up of distinct large marine ecosystems across: the Gulf of Alaska (GOA), Aleutian Islands (AI), eastern Bering Sea (EBS), northern Bering Sea, and Chukchi Sea and Beaufort Seas (referred to here as the Alaskan Arctic). Fishery management areas include the Gulf of Alaska and Bering Sea/Aleutian Islands. No federal fisheries currently occur in the Alaskan Arctic.
@@ -34,13 +34,13 @@ More information about the data and sea ice extent calculation can be found on [
 
  
 library(chartjs)
-library(RColorBrewer)
 library(dplyr)
 library(gt)
 library(downloadthis)
 library(ggplot2)
 library(reshape2)
 
+region_title <- "Alaskan Arctic"
 yearly_df = read.csv("data/alaskan_arctic_yearly.csv")
 baseline_df = read.csv("data/alaskan_arctic_baseline.csv")
 abb_months <- c("Jan","Feb","Mar",
@@ -68,33 +68,6 @@ recent_df$month <- factor(recent_df$month, levels = abb_months)
 
 ```{r}
 #| echo: false
-#| warning: false
-#| message: false
-
-# Plot
-
-library(plotly)
-
-fig <- plot_ly(baseline_df, x = ~month, y = ~upper_extent, type = 'scatter', mode = 'lines',
-        line = list(color = 'transparent'),
-        showlegend = FALSE, name = 'Upper bound') 
-fig <- fig %>% add_trace(y = ~lower_extent, type = 'scatter', mode = 'lines',
-            fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
-          showlegend = FALSE, name = 'Lower bound') 
-fig <- fig %>% add_trace(x = ~month, y = ~ext_baseline, type = 'scatter', mode = 'lines+markers',
-            line = list(color='rgb(0,100,80)'),name = 'Mean (1985-2015)') 
-            
-fig <- fig %>% add_trace(data = recent_df[recent_df$year > lastyear, ], x = ~month, y = ~seaice_extent, type = 'scatter', mode = 'lines+markers',
-            line = list(color='rgb(0,80,80)'),name = 'Lastyear') 
-fig <- fig %>% add_trace(data = recent_df[recent_df$year == lastyear, ], x = ~month, y = ~seaice_extent, type = 'scatter', mode = 'lines+markers',
-            line = list(color='rgb(0,60,80)'),name = 'Lastyear') 
-
-fig
-
-```
-
-```{r}
-# for chartjs
 
     var_orders = c(as.character(lastyear+1), as.character(lastyear),"Mean (1985-2015)", "1985-2022")
     plot_colors = c("#318CE7", "#F08080", "#94C973", "#cccccc", "#cccccc", "#cccccc")
@@ -103,7 +76,6 @@ fig
     customColors = list(border = plot_colors,
                         background = plot_colors)
 
-region_title <- "Northern Bering"
 
 
 ```
@@ -127,7 +99,34 @@ region_title <- "Northern Bering"
     cjsSeries(data = recent_df[recent_df$year > lastyear, ]$seaice_extent  , label = var_orders[1]) %>%
     cjsSeries(data = recent_df[recent_df$year == lastyear, ]$seaice_extent  , label = var_orders[2]) %>%
     cjsSeries(data = baseline_df$ext_baseline  , label = var_orders[3]) %>%
-    cjsSeries(data = baseline_df$lower_extent ,  borderDash=c(5,5), label = sprintf("Lower (Stdev) : (1985-%4d)", lastyear)) %>%
-    cjsSeries(data = baseline_df$upper_extent , borderDash = c(5,5), label = sprintf("Upper (Stdev): (1985-%4d)", lastyear))
+    cjsSeries(data = baseline_df$lower_extent ,  label = "Lower Error Bound : (1985-2015)") %>%
+    cjsSeries(data = baseline_df$upper_extent ,  label = "Upper Error Bound: (1985-2015)")
+
+```
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+
+anom = (recent_df[recent_df$year == lastyear, ]$seaice_extent - baseline_df$ext_baseline)
+
+  anom_colors = list(border = c( "#0047AB", "#CCCCCC"),
+                        background = c("#0047AB", "#CCCCCC"))
+  #  ANOMALY Chart
+  chartjs(palette = anom_colors) %>%
+    cjsOptions(responsive = TRUE, maintainAspectRatio = FALSE,
+                interaction = list(intersect = FALSE, axis= "index"),
+                plugins = list(legend=list(labels=list(font=list(size=15))),title = list(font=list(size=15),display = TRUE, text = sprintf("Y%4d Sea Ice Extent Anomalies : %s", lastyear, region_title))),
+                scales = list(y = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Million square km')),
+                              x = list(display = TRUE, title = list(font=list(size=15),display = TRUE, text = 'Month')))
+    )%>%
+    cjsLine(labels = month.abb) %>%
+    cjsSeries(data =anom , label = sprintf("Anomalies", lastyear)) %>%
+    cjsSeries(data =replicate(length(anom), 0) , label = "Baseline") %>%
+    cjsLegend()
 
 ```

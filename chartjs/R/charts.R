@@ -27,7 +27,7 @@ cjsHorizontalBar <- function(chartjs, labels, stacked = FALSE){
 #' @rdname charts
 #' @export
 cjsLine <- function(chartjs, labels){
-  cjs_base_chart(chartjs, labels, "line")  
+  cjs_base_chart(chartjs, labels,  "line")
     # cjsAddScale("x", "category") %>%
     # cjsAddScale("y", "linear")
 }
