@@ -1,37 +1,61 @@
 project:
   type: website
+  resources: 
+    - data/
+  render:
+    - "*.qmd"
+    - "!dataproc/"
 
 website:
-  title: "Sea Ice in Alaska"
-  navbar:
-    left:
-      - text: "Alaskan Arctic"
-        file: arctic.qmd
-      - text: "Eastern Bering"
-        file: ebering.qmd
-      - text: "Northern Bering"
-        file: nbering.qmd
-      - text: "ShinyFIN (SST)"
-        href: https://shinyfin.psmfc.org/ak-sst-mhw/
+  title: "Sea Ice @ Alaska"
 
-      - text: "PolarWatch"
-        href: https://polarwatch.noaa.gov
-
-    right:
+  sidebar:
+    pinned: true
+    align: center
+    tools: 
       - icon: github
-        href: https://github.com/shospital/alaska-seaice
+        href: https://github.com/polarwatch/alaska-seaice
+        text: "PolarWatch Repository"
+        target: _blank
+      - icon: globe
+        href: https://polarwatch.noaa.gov
+        text: "PolarWatch Website"
+        target: _blank
+
+    contents:
+      - href: index.qmd
+        text: "Main"
+      - href: arctic.qmd
+        text: "Alaskan Arctic"
+      - href: ebering.qmd
+        text: "Eastern Bering"
+      - href: nbering.qmd
+        text: "Northern Bering"
+      - href: sebering.qmd
+        text: "Southeastern Bering"
+      - href: methods.qmd
+        text: "Data and Methods"
+      - href: https://shinyfin.psmfc.org/ak-sst-mhw/      
+        text: "ShinyFIN (SST)"
+        target: _blank
+      - href: https://polarwatch.noaa.gov
+        text: "PolarWatch"
+        target: _blank
+        
+
 format:
   html:
     grid:
-      sidebar-width: 100px
-      body-width: 1000px
+      # sidebar-width: 200px
+      body-width: 960px
     theme: flatly
     css: styles.css
+    include-after-body: custom.js
     toc: true
 
 
 exclude:
-  - "_scripts/"
+  - "scripts/"
+  - "dataproc/"
 
 editor: visual
-
